@@ -16,7 +16,7 @@
       request.onupgradeneeded = function(e) {
         //   console.log(e)
         const db = request.result;
-        db.createObjectStore("pending", { autoIncrement: true });
+        // db.createObjectStore("pending", { autoIncrement: true });
       };
   
       request.onerror = function(e) {

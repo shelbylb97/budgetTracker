@@ -32,17 +32,25 @@ const FILES_TO_CACHE = [
   });
   
   self.addEventListener('fetch', (event) => {
-    if (event.request.url.startsWith('/api/')) {
+    if (event.request.url.includes('/api/')) {
       event.respondWith(
         caches.open(RUNTIME).then((cachedResponse) => {
-          if (cachedResponse) {
+        //   if (cachedResponse) {
+        //     return cachedResponse;
+        //   }
+        if (cachedResponse) {
+            cache.put(event.request.url, response.clone());
+                     }
             return cachedResponse;
-          }
+         }
+         
+                     
+
   
-          return caches.open(RUNTIME).then((cache) => {
-            return fetch(event.request).then((response) => {
-              return cache.put(event.request, response.clone()).then(() => {
-                return response;
+        //   return caches.open(RUNTIME).then((cache) => {
+            // return fetch(event.request).then((response) => {
+            //   return cache.put(event.request, response.clone()).then(() => {
+                // return response;
               });
             });
           });
